@@ -1,0 +1,50 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --bg-color: #f2f2f2;
+    --main-color: #ffffff;
+    --sec-color: #151435;
+    --obj-color: #ffa31a;
+    --font-colord: #000000;
+    --font-colorw: #ffffff;
+    --font-colorlite: #e4e4e4;
+    --dark-color: #000000;
+    --light-color: rgb(252, 252, 252);
+
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--font-colord);
+}
+
+.container {
+    width: 1280px;
+
+}
+
+nav{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.logo-container{
+    width: 12%;
+}
+img.logo{
+    width: 100%;
+}

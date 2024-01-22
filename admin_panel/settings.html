@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Cookie&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <!-- <?php require_once("navbar.php") ?>
+        <?php require_once("sidebar.php") ?> -->
+        <div id="header"></div>
+    </header>
+    <main>
+        <!-- side-bar -->
+        <div id="side-bar"></div>
+
+        <section class="dash-panel">
+            <div class="dash-container">
+                <div class="dashboard">
+                    <h1 class="dash-head">Settings</h1>
+                </div>
+            </div>
+        </section>            
+    </main>
+    <script>
+        $(function () {
+            $("#header").load("navbar.html");
+            $("#side-bar").load("sidebar.html");
+        });
+    </script>
+    <script src="/script.js"></script>
+</body>
+</html>

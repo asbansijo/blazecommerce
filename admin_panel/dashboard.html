@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Cookie&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div id="header"></div>
+        <!-- <?php require_once("navbar.php") ?>
+        <?php require_once("sidebar.php") ?> -->
+    </header>
+
+
+    <main>
+        <div id="side-bar"></div>
+
+        <section class="dash-panel">
+            <div class="dash-container">
+                <div class="dashboard">
+                    <h1 class="dash-head">DASHBOARD</h1>
+                    <!-- ---- Dashboard Overview ---- -->
+                    <div class="insight">
+                        <div class="out">
+                            <div class="flex-container">
+                                <div class="sales">
+                                    <span class="material-symbols-outlined sale">analytics</span>
+                                    <div class="inner-flex-container">
+                                        <div class="sales-data">
+                                            <h3>Total Orders</h3>
+                                            <h1>$10,000</h1>
+                                        </div>
+                                        <div class="progress">
+                                            <svg>
+                                                <circle cx="38" cy="38" r="36"></circle>
+                                            </svg>
+                                            <div class="number">
+                                                <p>80%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="end-desc">Last 24 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="out">
+                            <div class="flex-container">
+                                <div class="expenses">
+                                    <span class="material-symbols-outlined sale">bar_chart</span>
+                                    <div class="inner-flex-container">
+                                        <div class="sales-data">
+                                            <h3>Total Income</h3>
+                                            <h1>$10,000</h1>
+                                        </div>
+                                        <div class="progress">
+                                            <svg>
+                                                <circle cx="38" cy="38" r="36"></circle>
+                                            </svg>
+                                            <div class="number">
+                                                <p>56%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="end-desc">Last 24 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="out">
+                            <div class="flex-container">
+                                <div class="income">
+                                    <span class="material-symbols-outlined sale">trending_up</span>
+                                    <div class="inner-flex-container">
+                                        <div class="sales-data">
+                                            <h3>Recent Users</h3>
+                                            <h1>$10,000</h1>
+                                        </div>
+                                        <div class="progress">
+                                            <svg>
+                                                <circle cx="38" cy="38" r="36"></circle>
+                                            </svg>
+                                            <div class="number">
+                                                <p>70%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="end-desc">Last 24 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- recent order -->
+                    <div class="dtl-table recent-order">
+                        <h2>RECENT ORDERS</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Number</th>
+                                    <th>Payment</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Iphone 14pro max</td>
+                                    <td>456123</td>
+                                    <td>paid</td>
+                                    <td style="color: #56c700;">Confirmed</td>
+                                    <td style="color: #ffa31a;">details</td>
+                                </tr>
+                                <tr>
+                                    <td>Nikon D7500</td>
+                                    <td>956123</td>
+                                    <td>due</td>
+                                    <td style="color: #ff2121;">Pending</td>
+                                    <td style="color: #ffa31a;">details</td>
+                                </tr>
+                                <tr>
+                                    <td>Gaming chair</td>
+                                    <td>416123</td>
+                                    <td>paid</td>
+                                    <td style="color: #56c700;">Confirmed</td>
+                                    <td style="color: #ffa31a;">details</td>
+                                </tr>
+                                <tr>
+                                    <td>Noise AirBuds</td>
+                                    <td>456123</td>
+                                    <td>paid</td>
+                                    <td style="color: #56c700;">Confirmed</td>
+                                    <td style="color: #ffa31a;">details</td>
+                                </tr>
+                                <tr>
+                                    <td>Recliner</td>
+                                    <td>456123</td>
+                                    <td>due</td>
+                                    <td style="color: #ff2121;">Pending</td>
+                                    <td style="color: #ffa31a;">details</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+        $(function () {
+            $("#header").load("navbar.html");
+            $("#side-bar").load("sidebar.html");
+        });
+    </script>
+
+    <script src="/script.js"></script>
+
+</body>
+
+</html>
