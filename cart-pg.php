@@ -1,3 +1,39 @@
+<?php
+session_start();
+
+// Check if the session variable 'cart' is set
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array();
+}
+
+// Check if the product_id is provided
+if (isset($_GET['product_id'])) {
+    $productId = $_GET['product_id'];
+
+    // Fetch product details based on the product_id
+    // Add your database connection and query logic here
+
+    // Assuming $productDetails contains the fetched details
+    $productName = $productDetails['product_title'];
+    $productPrice = $productDetails['product_price'];
+    $productImage = $productDetails['product_img'];
+
+    // Store product information in the session
+    $_SESSION['cart'][] = array(
+        'product_id' => $productId,
+        'product_name' => $productName,
+        'product_price' => $productPrice,
+        'product_image' => $productImage
+    );
+
+    // Redirect back to the product details page or the cart page
+    header("Location: product_details.php?product_id=$productId");
+    exit;
+}
+?>
+
+
+
 <html lang="en">
 
 <head>
@@ -42,27 +78,18 @@
             <p>My Cart</p>
             <hr>
             <div class="cart-items">
-                <div class="cart-products">
-                    <div class="cart-img-container">
-                        <img class="card-img" src="./product_img/imac.png" alt="">
-                    </div>
-                    <div>
-                        <p>Apple Mac</p>
-                    </div>
-                    <div>Quantity</div>
-                    <div id="cart-remove">&times;</div>
-                </div>
-                <hr>
-                <div class="cart-products">
-                    <div class="cart-img-container">
-                        <img class="card-img" src="./product_img/shoe.png" alt="">
-                    </div>
-                    <div>
-                        <p>Nike Air</p>
-                    </div>
-                    <div>Quantity</div>
-                    <div id="cart-remove">&times;</div>
-                </div>
+              <?php foreach ($_SESSION['cart'] as $cartItem): ?>
+                  <div class="cart-products">
+                      <div class="cart-img-container">
+                          <img class="card-img" src="./images/<?= $cartItem['product_image'] ?>" alt="<?= $cartItem['product_name'] ?>">
+                      </div>
+                      <div class="prod-dtls-cart">
+                          <p class="prod-title"><?= $cartItem['product_name'] ?></p>
+                          <p class="prod-price">&#8377 <?= $cartItem['product_price'] ?></p>
+                      </div>
+                  </div>
+                  <hr>
+              <?php endforeach; ?>
             </div>
         </div>
       </div>
