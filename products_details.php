@@ -1,31 +1,43 @@
-<?php
+<?php // products.details.php
+session_start();
 include "./connection.php";
 
 // Check if a product ID is provided in the URL
 if (isset($_GET['product_id'])) {
-  $productId = $_GET['product_id'];
+    $productId = $_GET['product_id'];
 
-  // Fetch details of the selected product
-  $fetchProduct = "SELECT * FROM products WHERE product_id = $productId";
-  $resultProduct = mysqli_query($conn, $fetchProduct);
+    // Fetch details of the selected product
+    $fetchProduct = "SELECT * FROM products WHERE product_id = $productId";
+    $resultProduct = mysqli_query($conn, $fetchProduct);
 
-  if ($rowProduct = mysqli_fetch_assoc($resultProduct)) {
-      $productName = $rowProduct['product_title'];
-      $productPrice = $rowProduct['product_price'];
-      $productImage = $rowProduct['product_img'];
-  } else {
-      // Handle the case where no product is found
-      echo "Product not found.";
-      exit;
-  }
+    if ($rowProduct = mysqli_fetch_assoc($resultProduct)) {
+        $productName = $rowProduct['product_title'];
+        $productPrice = $rowProduct['product_price'];
+        $productImage = $rowProduct['product_img'];
+    } else {
+        // Handle the case where no product is found
+        echo "Product not found.";
+        exit;
+    }
 
-  // Fetch products similar to the selected product
-  $fetchSimilarProducts = "SELECT * FROM products WHERE category_id = {$rowProduct['category_id']} AND product_id != $productId LIMIT 7";
-  $resultSimilarProducts = mysqli_query($conn, $fetchSimilarProducts);
+    // Fetch products similar to the selected product
+    $fetchSimilarProducts = "SELECT * FROM products WHERE category_id = {$rowProduct['category_id']} AND product_id != $productId LIMIT 7";
+    $resultSimilarProducts = mysqli_query($conn, $fetchSimilarProducts);
 } else {
-  // Handle the case where no product ID is provided
-  echo "No product selected.";
-  exit;
+    // Handle the case where no product ID is provided
+    echo "No product selected.";
+    exit;
+}
+
+if (isset($_POST['add_to_cart'])) {
+    // Store product information in the session
+    $_SESSION['cart'][] = array(
+        'product_id' => $productId,
+        'product_name' => $productName,
+        'product_price' => $productPrice,
+        'product_image' => $productImage
+    );
+    
 }
 ?>
 
@@ -77,8 +89,10 @@ if (isset($_GET['product_id'])) {
             <p class="prod-title"><?= $productName ?></p>
             <p class="prod-price">&#8377 <?= $productPrice ?></p>
             <div class="b-ad-btn">
-              <button class="buy">Buy Now</button>
-              <button class="ad-crt">Add to Cart</button>
+                <form method="post" action="">
+                    <button type="submit" class="buy">Buy Now</button>
+                    <button type="submit" class="ad-crt" name="add_to_cart">Add to Cart</button>
+                </form>
             </div>
           </div>
         </div>
@@ -168,6 +182,33 @@ if (isset($_GET['product_id'])) {
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"
     integrity="sha256-oP6HI/t1jdt1tAkaAq4Y5x9u5K3eckbllAqLOczlMUE=" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function () {
+        // Add an event listener to the "Add to Cart" form
+        $('form[name="add-to-cart-form"]').submit(function (event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Use AJAX to submit the form data
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function (response) {
+                    // Handle the success response (optional)
+                    console.log(response);
+
+                    // You can display a message to the user if needed
+                    alert('Product added to cart successfully!');
+                },
+                error: function (error) {
+                    // Handle the error response (optional)
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {

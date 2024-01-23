@@ -45,7 +45,7 @@ $result = mysqli_query($conn, $sql);
         <input class="search" type="search" value="" placeholder="search">
         <ul class="nav-list navbar-nav mb-2 mb-lg-0">
         <li class="nav-item"><button style="background:#675fc3;padding: 5px 9px;border-radius: 4px;"><a class="log-link" style="color: #fbfbfb;" href="./login.php"><i class="fa-regular fa-user nav-icon"></i>Login</a></button></li>
-          <li class="nav-item"><a class="log-link" style="color: #000000;" href="./cart-pg.html"><i class="fa-solid fa-cart-shopping nav-icon"></i>
+          <li class="nav-item"><a class="log-link" style="color: #000000;" href="./cart-pg.php"><i class="fa-solid fa-cart-shopping nav-icon"></i>
             Cart</a></li>
           <li class="nav-item"><a class="log-link" style="color: #000000;" href="#"><i class="fa-regular fa-heart nav-icon"></i>
             Wishlist</a></li>

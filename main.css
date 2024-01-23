@@ -65,6 +65,18 @@ a.log-link {
     color: #ffffff;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
+    position: relative;
+}
+span.cart-count {
+    position: absolute;
+    top: -10px;
+    left: 19px;
+    background-color: #ff3030;
+    width: 20px;
+    border-radius: 50px;
+    text-align: center;
+    height: 21px;
+    font-size: 15px;
 }
 .nav-icon {
     padding: 0px 4px;
@@ -484,52 +496,147 @@ p.filters {
 
 /* CART PAGE */
 
-.cart {
-    background-color: #fbfbfb;
-    padding: 10px;
+.cart-tabs {
+    display: flex;
+    justify-content: space-between;
     margin-top: 15px;
 }
 
+.cart {
+    background-color: #fbfbfb;
+    padding: 10px;
+    width: 69%;
+    overflow: scroll; /* Enable vertical scroll for cart products */
+    max-height: calc(100vh - 100px); /* Adjust the maximum height as needed */
+}
+
+
+p.my-cart {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.cart-price-details {
+    width: 30%;
+    background-color: #ffffff;
+    height: fit-content;
+    padding: 10px;
+    position: sticky;
+    top: 0; /* Make the Price Details div sticky at the top */
+}
+
+p.price-details {
+    font-size: 20px;
+    font-weight: 500;
+    color: #4d4d52;
+}
+
 .cart-img-container {
-    height: 220px;
-    width: 220px;
+    height: 180px;
+    width: 180px;
     background-color: #f1f1f1;
     display: flex;
     align-items: center;
 }
+.cart::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.cart {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
 .cart-products {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    position: relative;
 }
 
-div#cart-remove {
-    font-size: 25px;
-    cursor: pointer;
+.prod-dtls-cart {
+    margin-left: 20px;
+    width: 45%;
 }
+
+.cart-inner hr :last-child {
+    display: none;
+}
+
+p.cart-prod-title {
+    font-size: 28px;
+    font-weight: 300;
+}
+
+p.cart-prod-price {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+button.remove-product {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    background: none;
+}
+
+.counter {
+    width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0%;
+    right: 15%;
+}
+
+.counter input {
+    width: 38px;
+    border: 0;
+    line-height: 25px;
+    font-size: 15px;
+    text-align: center;
+    background: #675fc3;
+    color: #fff;
+    appearance: none;
+    outline: 0;
+}
+
+.counter span {
+    font-size: 25px;
+    padding: 0 10px;
+    cursor: pointer;
+    color: #2b2b2b;
+    user-select: none;
+}
+
 /*  */
 
 
 /* ===== Scrollbar CSS ===== */
 
 * {
-    scrollbar-width: auto;
+    scrollbar-width: thin;
     scrollbar-color: #e7e7e7 #ffffff;
-  }
+}
 
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
     width: 8px;
-  }
+    transition: width 0.5s; /* Add a transition for smooth width change */
+}
 
-  *::-webkit-scrollbar-track {
+*::-webkit-scrollbar:hover {
+    width: 16px; /* Change the width on hover to make it visible */
+}
+
+*::-webkit-scrollbar-track {
     background: #e7e7e7;
-  }
+}
 
-  *::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: #bdb8b8;
     border-radius: 10px;
     border: 1px solid #ffffff;
-  }
-
+}
 /*  */

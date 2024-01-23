@@ -74,23 +74,35 @@ if (isset($_GET['product_id'])) {
   <main>
     <div class="cart-pg">
       <div class="container">
-        <div class="cart">
-            <p>My Cart</p>
+        <div class="cart-tabs">
+         <div class="cart">
+            <p class="my-cart">My Cart</p>
             <hr>
-            <div class="cart-items">
+            <div class="cart-inner">
               <?php foreach ($_SESSION['cart'] as $cartItem): ?>
                   <div class="cart-products">
                       <div class="cart-img-container">
                           <img class="card-img" src="./images/<?= $cartItem['product_image'] ?>" alt="<?= $cartItem['product_name'] ?>">
                       </div>
                       <div class="prod-dtls-cart">
-                          <p class="prod-title"><?= $cartItem['product_name'] ?></p>
-                          <p class="prod-price">&#8377 <?= $cartItem['product_price'] ?></p>
+                          <p class="cart-prod-title truncate"><?= $cartItem['product_name'] ?></p>
+                          <p class="cart-prod-price">&#8377 <?= $cartItem['product_price'] ?></p>
                       </div>
+                      <div class="counter">
+                        <span class="down" onClick='decreaseCount(event, this)'>-</span>
+                        <input type="text" value="1">
+                        <span class="up" onClick='increaseCount(event, this)'>+</span>
+                      </div>
+                      <button class="save-product"></button>
+                      <button class="remove-product">REMOVE</button>
                   </div>
                   <hr>
               <?php endforeach; ?>
             </div>
+          </div>
+          <div class="cart-price-details">
+            <p class="price-details">Price Details</p>
+          </div>
         </div>
       </div>
     </div>
@@ -151,7 +163,7 @@ if (isset($_GET['product_id'])) {
       </div>
     </section>
   </footer>
-  <!-- <script src="index.js"></script> -->
+  <script src="index.js"></script>
 </body>
 
 </html>
