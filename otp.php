@@ -86,17 +86,17 @@ if(isset($_REQUEST['Verify_OTP'])) {
                     </div>
                 </div>
                 <div class="log-right">
-                    <p id="otp-descrip">Please enter the OTP sent to 9876546786</p>
+                    <p id="otp-descrip">Please enter the OTP sent to 9******606</p>
                     <form class="otp-form" method="REQUEST" action="">
                         <div class="otp-field">
-                            <input class="otp-box" type="text" maxlength="1" />
-                            <input class="otp-box" type="text" maxlength="1" />
-                            <input class="otp-box" type="text" maxlength="1" />
-                            <input class="otp-box" type="text" maxlength="1" />
-                            <input class="otp-box" type="text" maxlength="1" />
-                            <input class="otp-box" type="text" maxlength="1" />
+                            <input class="otp-box" type="text" maxlength="1"/>
+                            <input class="otp-box" type="text" maxlength="1"/>
+                            <input class="otp-box" type="text" maxlength="1"/>
+                            <input class="otp-box" type="text" maxlength="1"/>
+                            <input class="otp-box" type="text" maxlength="1"/>
+                            <input class="otp-box" type="text" maxlength="1"/>
                         </div>
-                        <input type="hidden" id="hidden-otp" name="otp" />
+                        <input type="hidden" id="hidden-otp" name="otp"/>
                         <button class="verify-btn" type="submit" name="Verify_OTP">Verify</button>
                     </form>
                 </div>
