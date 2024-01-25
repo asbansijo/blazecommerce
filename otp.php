@@ -23,7 +23,6 @@ if(isset($_REQUEST['Verify_OTP'])) {
         } elseif ($user_role == 'user') {
             header('location: index.php'); // Replace with the actual user dashboard page
         } else {
-            // Handle other roles or scenarios
             header('location: index.php'); // Default redirect
         }
     } else {
