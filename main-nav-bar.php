@@ -1,3 +1,18 @@
+<!-- nav-bar -->
+<?php
+include "./connection.php"; 
+
+
+$userID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; 
+
+// Check if the user is logged in
+if ($userID) {
+    $query = "SELECT username FROM users WHERE id = $userID"; 
+    $result = mysqli_query($connection, $query);
+    $userData = mysqli_fetch_assoc($result);
+    $username = $userData['username'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +25,11 @@
               width="70" height="70"></a>
           <input class="search" type="search" value="" placeholder="search">
           <ul class="nav-list navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item"><a class="log-link" href="./login.php"><i
-                  class="fa-regular fa-user nav-icon"></i>Login</a></li>
+            <?php if ($userID): ?>
+                <li class="nav-item"><span class="log-link">Welcome, <?php echo $username; ?>!</span></li>
+            <?php else: ?>
+                <li class="nav-item"><a class="log-link" href="./login.php"><i class="fa-regular fa-user nav-icon"></i>Login</a></li>
+            <?php endif; ?>
             <li class="nav-item">
               <a class="log-link" href="./cart-pg.php" target="_blank">
                 <span class="cart-count">0</span>

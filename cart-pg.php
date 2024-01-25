@@ -19,17 +19,19 @@ if (isset($_GET['product_id'])) {
     $productImage = $productDetails['product_img'];
 
     // Store product information in the session
-    $_SESSION['cart'][] = array(
-        'product_id' => $productId,
-        'product_name' => $productName,
-        'product_price' => $productPrice,
-        'product_image' => $productImage
-    );
+    // $_SESSION['cart'][] = array(
+    //     'product_id' => $productId,
+    //     'product_name' => $productName,
+    //     'product_price' => $productPrice,
+    //     'product_image' => $productImage
+    // );
 
     // Redirect back to the product details page or the cart page
     header("Location: product_details.php?product_id=$productId");
     exit;
 }
+
+
 ?>
 
 
@@ -65,7 +67,7 @@ if (isset($_GET['product_id'])) {
 
 <body>
   <header class="sticky-top" style="background-color: #675fc3;">
-    <?php include "./main-nav-bar.html";?>
+    <?php include "./main-nav-bar.php";?>
   </header>
   <a id="myBtn" onclick="topFunction()">
     <i class="fas fa-arrow-up"></i>
@@ -79,13 +81,16 @@ if (isset($_GET['product_id'])) {
             <p class="my-cart">My Cart</p>
             <hr>
             <div class="cart-inner">
-              <?php foreach ($_SESSION['cart'] as $cartItem): ?>
-                  <div class="cart-products">
+    <?php foreach ($_SESSION['cart'] as $cartItem): ?>
+        <div class="cart-products">
+            <form action="remove_product.php" method="post">
+                <div class="inner-cart-products">
+                    <input type="hidden" name="product_id" value="<?= $cartItem['product_id'] ?>">
                       <div class="cart-img-container">
                           <img class="card-img" src="./images/<?= $cartItem['product_image'] ?>" alt="<?= $cartItem['product_name'] ?>">
                       </div>
                       <div class="prod-dtls-cart">
-                          <p class="cart-prod-title truncate"><?= $cartItem['product_name'] ?></p>
+                          <a href="products_details.php?product_id=<?= $cartItem['product_id'] ?>"><p class="cart-prod-title truncate"><?= $cartItem['product_name'] ?></p></a>
                           <p class="cart-prod-price">&#8377 <?= $cartItem['product_price'] ?></p>
                       </div>
                       <div class="counter">
@@ -95,13 +100,20 @@ if (isset($_GET['product_id'])) {
                       </div>
                       <button class="save-product"></button>
                       <button class="remove-product">REMOVE</button>
-                  </div>
-                  <hr>
-              <?php endforeach; ?>
-            </div>
+                </div>
+            </form>
+        </div>
+        <hr>
+    <?php endforeach; ?>
+</div>
           </div>
           <div class="cart-price-details">
             <p class="price-details">Price Details</p>
+            <hr>
+            <p class="cart-price">Price(1 item)</p>
+            <p class="charges">Delivery charges</p>
+            <hr>
+            <p class="total-amount">Total</p>
           </div>
         </div>
       </div>

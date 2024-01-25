@@ -72,7 +72,7 @@ if (isset($_POST['add_to_cart'])) {
 <body>
 
   <header class="sticky-top" style="background-color: #675fc3;">
-    <?php include "./main-nav-bar.html";?>
+    <?php include "./main-nav-bar.php";?>
   </header>
   <a id="myBtn" onclick="topFunction()">
     <i class="fas fa-arrow-up"></i>

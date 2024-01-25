@@ -7,7 +7,7 @@
     padding: 0;
     outline: 0;
     border: none;
-    text-decoration: none;
+    text-decoration: none !important;
     box-sizing: border-box;
     font-family: 'Roboto Condensed', sans-serif;
 }
@@ -547,7 +547,7 @@ p.price-details {
   scrollbar-width: none;  /* Firefox */
 }
 
-.cart-products {
+.inner-cart-products {
     display: flex;
     justify-content: flex-start;
     position: relative;
@@ -565,18 +565,23 @@ p.price-details {
 p.cart-prod-title {
     font-size: 28px;
     font-weight: 300;
+    color: #000000;
 }
+
 
 p.cart-prod-price {
     font-size: 22px;
     font-weight: 500;
 }
 
+
 button.remove-product {
     position: absolute;
     bottom: 0%;
     right: 0%;
     background: none;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .counter {

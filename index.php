@@ -200,7 +200,7 @@ $result = mysqli_query($conn, $sql);
               <a class="cards-link" href="#">
                 <div class="card-inner">
                   <div class="c-img-container">
-                    <img src="./product_img/moto_razr_40_ultra-2.webp" class="card-img-top card-img" alt="...">
+                    <img src="./product_img/moto_razr_40_ultra-2.png" class="card-img-top card-img" alt="...">
                   </div>
                   <div class="card-body">
                     <p class="card-title">Motorola razr 40 ultra</p>
@@ -310,7 +310,7 @@ $result = mysqli_query($conn, $sql);
               <a class="cards-link" href="#">
                 <div class="card-inner">
                   <div class="c-img-container">
-                    <img src="./product_img/moto_razr_40_ultra-2.webp" class="card-img-top card-img" alt="...">
+                    <img src="./product_img/moto_razr_40_ultra-2.png" class="card-img-top card-img" alt="...">
                   </div>
                   <div class="card-body">
                     <p class="card-title">Motorola razr 40 ultra</p>
