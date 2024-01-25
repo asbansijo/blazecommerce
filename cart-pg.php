@@ -81,30 +81,30 @@ if (isset($_GET['product_id'])) {
             <p class="my-cart">My Cart</p>
             <hr>
             <div class="cart-inner">
-                <?php foreach ($_SESSION['cart'] as $cartItem): ?>
-                    <div class="cart-products">
-                        <form action="remove_product.php" method="post">
-                            <div class="inner-cart-products">
-                                <input type="hidden" name="product_id" value="<?= $cartItem['product_id'] ?>">
-                                  <div class="cart-img-container">
-                                      <img class="card-img" src="./images/<?= $cartItem['product_image'] ?>" alt="<?= $cartItem['product_name'] ?>">
-                                  </div>
-                                  <div class="prod-dtls-cart">
-                                      <a href="products_details.php?product_id=<?= $cartItem['product_id'] ?>"><p class="cart-prod-title truncate"><?= $cartItem['product_name'] ?></p></a>
-                                      <p class="cart-prod-price">&#8377 <?= $cartItem['product_price'] ?></p>
-                                  </div>
-                                  <div class="counter">
-                                    <span class="down" onClick='decreaseCount(event, this)'>-</span>
-                                    <input type="text" value="1">
-                                    <span class="up" onClick='increaseCount(event, this)'>+</span>
-                                  </div>
-                                  <button class="save-product"></button>
-                                  <button class="remove-product">REMOVE</button>
-                            </div>
-                        </form>
-                    </div>
-                    <hr>
-                <?php endforeach; ?>
+              <?php foreach ($_SESSION['cart'] as $cartItem): ?>
+                  <div class="cart-products">
+                      <form action="remove_product.php" method="post">
+                          <div class="inner-cart-products">
+                              <input type="hidden" name="product_id" value="<?= $cartItem['product_id'] ?>">
+                                <div class="cart-img-container">
+                                  <img class="card-img" src="./images/<?= $cartItem['product_image'] ?>" alt="<?= $cartItem['product_name'] ?>">
+                                </div>
+                                <div class="prod-dtls-cart">
+                                  <a href="products_details.php?product_id=<?= $cartItem['product_id'] ?>"><p class="cart-prod-title truncate"><?= $cartItem['product_name'] ?></p></a>
+                                  <p class="cart-prod-price">&#8377 <?= $cartItem['product_price'] ?></p>
+                                </div>
+                                <div class="counter">
+                                  <span class="down" onClick='decreaseCount(event, this)'>-</span>
+                                  <input type="text" value="1">
+                                  <span class="up" onClick='increaseCount(event, this)'>+</span>
+                                </div>
+                                <button class="save-product"></button>
+                                <button class="remove-product">REMOVE</button>
+                          </div>
+                      </form>
+                  </div>
+                  <hr>
+              <?php endforeach; ?>
             </div>
           </div>
           <div class="cart-price-details">
