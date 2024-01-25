@@ -2,7 +2,6 @@
 <?php
 include "./connection.php"; 
 
-
 $userID = isset($_SESSION['id']) ? $_SESSION['id'] : null; 
 
 // Check if the user is logged in
