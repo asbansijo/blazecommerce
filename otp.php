@@ -33,9 +33,6 @@ if(isset($_REQUEST['Verify_OTP'])) {
 ?>
 
 
-
-?> 
-
 <!DOCTYPE html>
 <html lang="en">
 

@@ -5,12 +5,10 @@ include "./connection.php";
 if (isset($_GET['category_id'])) {
     $categoryId = $_GET['category_id'];
 
-    // Use the category ID to filter and fetch products from the selected category
     $fetch = "SELECT * FROM products WHERE category_id = $categoryId ORDER BY product_id ASC";
     $result = mysqli_query($conn, $fetch);
 
 } else {
-    // Handle the case where no category ID is provided
     echo "No category selected.";
 }
 ?>
