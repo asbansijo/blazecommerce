@@ -199,7 +199,7 @@ if (isset($_GET['product_id'])) {
                     // Toggle button text
                     addToCartBtn.hide();
                     goToCartBtn.show();
-                    // alert('Product added to cart successfully!');
+                    // window.scrollTo(0,0);
                     loadCartQuantity();
                 },
                 error: function (error) {

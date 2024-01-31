@@ -1,5 +1,5 @@
 <?php // action.php
-
+session_start();
 include "./connection.php";
 
 if (isset($_POST['pid'])) {
@@ -37,4 +37,17 @@ if(isset($_GET['cartCount']) && $_GET['cartCount'] === 'cartCount'){
 
     echo $rows;
 }
+
+if(isset($_GET['remove'])){
+    $id = $_GET['remove'];
+
+    $stmt = $conn->prepare("DELETE FROM cart WHERE id=?");
+    $stmt->bind_param("i",$id);
+    $stmt->execute();
+
+    $_SESSION['showAlert'] = 'block';
+    $_SESSION['message'] = 'Item removed from Cart';
+    header('location:cart-pg.php');
+}
+
 ?>

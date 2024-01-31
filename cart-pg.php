@@ -1,4 +1,5 @@
 <?php
+include "./connection.php";
 session_start();
 
 ?>
@@ -50,39 +51,52 @@ session_start();
             <p class="my-cart">My Cart</p>
             <hr>
             <div class="cart-inner">
-              <?php foreach ($_SESSION['cart'] as $cartItem): ?>
-                  <div class="cart-products">
-                      <form action="remove_product.php" method="post">
-                          <div class="inner-cart-products">
-                              <input type="hidden" name="product_id" value="<?= $cartItem['product_id'] ?>">
-                                <div class="cart-img-container">
-                                  <img class="card-img" src="./images/<?= $cartItem['product_image'] ?>" alt="<?= $cartItem['product_name'] ?>">
-                                </div>
-                                <div class="prod-dtls-cart">
-                                  <a href="products_details.php?product_id=<?= $cartItem['product_id'] ?>"><p class="cart-prod-title truncate"><?= $cartItem['product_name'] ?></p></a>
-                                  <p class="cart-prod-price">&#8377 <?= $cartItem['product_price'] ?></p>
-                                </div>
-                                <div class="counter">
-                                  <span class="down" onClick='decreaseCount(event, this)'>-</span>
-                                  <input type="text" value="1">
-                                  <span class="up" onClick='increaseCount(event, this)'>+</span>
-                                </div>
-                                <button class="save-product"></button>
-                                <button class="remove-product">REMOVE</button>
-                          </div>
-                      </form>
+            <?php
+              // Fetch cart items from the database
+              $stmt = $conn->prepare("SELECT * FROM cart");
+              $stmt->execute();
+              $result = $stmt->get_result();
+
+              // Display cart items
+              while ($cartItem = $result->fetch_assoc()) {
+                ?>
+                <div class="cart-products">
+                  <div class="inner-cart-products">
+                    <div class="cart-img-container">
+                      <img class="card-img" src="./images/<?= $cartItem['cart_product_image'] ?>" alt="<?= $cartItem['cart_product_title'] ?>">
+                    </div>
+                    <div class="prod-dtls-cart">
+                      <a href="products_details.php?product_id=<?= $cartItem['product_id'] ?>"><p class="cart-prod-title truncate"><?= $cartItem['cart_product_title'] ?></p></a>
+                      <p class="cart-prod-price">&#8377 <?= $cartItem['cart_product_price'] ?></p>
+                    </div>
+                    <div class="counter">
+                      <span class="down" onClick='decreaseCount(event, this)'>-</span>
+                      <input type="text" value="<?= $cartItem['quantity'] ?>">
+                      <span class="up" onClick='increaseCount(event, this)'>+</span>
+                    </div>
+                    <button class="save-product"></button>
+                    <a href="action.php?remove=<?= $cartItem['id'] ?>" class="remove-product" onclick="return confirm('Are you sure want to remove from the cart')">REMOVE</a>
                   </div>
-                  <hr>
-              <?php endforeach; ?>
+                </div>
+                <hr>
+              <?php } ?>
             </div>
           </div>
           <div class="cart-price-details">
             <p class="price-details">Price Details</p>
             <hr>
-            <p class="cart-price">Price(1 item)</p>
-            <p class="charges">Delivery charges</p>
+            <div class="prices">
+              <p class="cart-price-head">Price</p>
+              <p class="cart-items-price">&#8377 </p>
+            </div>
+            
+            <!-- <p class="charges">Delivery charges</p> -->
             <hr>
-            <p class="total-amount">Total</p>
+            <div class="totals">
+              <p class="total-head">Total</p>
+              <p class="total-price">&#8377 </p>
+            </div>
+            <a class="checkout" href=""><button class="checkout">Checkout</button></a>
           </div>
         </div>
       </div>

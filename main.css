@@ -564,6 +564,33 @@ p.price-details {
     color: #4d4d52;
 }
 
+.prices {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+p.cart-price-head{
+    margin: 5px 0px;
+}
+p.cart-items-price{
+    margin: 5px 0px;
+}
+
+.totals{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button.checkout-btn {
+    background-color: #675fc3;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 3px;
+    width: 100%;
+    font-size: 22px;
+}
+
 .cart-img-container {
     height: 180px;
     width: 180px;
@@ -571,6 +598,7 @@ p.price-details {
     display: flex;
     align-items: center;
 }
+
 .cart::-webkit-scrollbar {
     display: none;
 }
@@ -609,12 +637,13 @@ p.cart-prod-price {
 }
 
 
-button.remove-product {
+a.remove-product {
     position: absolute;
     bottom: 0%;
     right: 0%;
     font-size: 16px;
     font-weight: 500;
+    color: #000000;
 }
 
 .counter {
@@ -648,6 +677,8 @@ button.remove-product {
 }
 
 /*  */
+
+
 
 
 /* ===== Scrollbar CSS ===== */
