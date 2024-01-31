@@ -132,6 +132,7 @@ if (isset($_POST['edit-product'])) {
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -313,7 +314,6 @@ if (isset($_POST['edit-product'])) {
         </section>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         function filterByCategory(categoryId) {
             window.location.href = 'admin-products.php?category_id=' + categoryId;
@@ -363,7 +363,6 @@ if (isset($_POST['edit-product'])) {
                         success: function (response) {
                             if (response) {
                                 location.reload();
-                                alert("Product deleted successfully!");
                             } else {
                                 // $(this).closest("tr").remove();
                                 alert("Error deleting product.");

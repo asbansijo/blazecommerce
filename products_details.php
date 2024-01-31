@@ -14,6 +14,7 @@ if (isset($_GET['product_id'])) {
         $productName = $rowProduct['product_title'];
         $productPrice = $rowProduct['product_price'];
         $productImage = $rowProduct['product_img'];
+
     } else {
         // Handle the case where no product is found
         echo "Product not found.";
@@ -29,16 +30,7 @@ if (isset($_GET['product_id'])) {
     exit;
 }
 
-if (isset($_POST['add_to_cart'])) {
-    // Store product information in the session
-    $_SESSION['cart'][] = array(
-        'product_id' => $productId,
-        'product_name' => $productName,
-        'product_price' => $productPrice,
-        'product_image' => $productImage
-    );
-    
-}
+
 ?>
 
 <html lang="en">
@@ -48,10 +40,11 @@ if (isset($_POST['add_to_cart'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blazing</title>
+  <link rel="stylesheet" href="main.css">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
     integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -67,13 +60,13 @@ if (isset($_POST['add_to_cart'])) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
 
-  <header class="sticky-top" style="background-color: #675fc3;">
     <?php include "./main-nav-bar.php";?>
-  </header>
+
   <a id="myBtn" onclick="topFunction()">
     <i class="fas fa-arrow-up"></i>
   </a>
@@ -89,9 +82,14 @@ if (isset($_POST['add_to_cart'])) {
             <p class="prod-title"><?= $productName ?></p>
             <p class="prod-price">&#8377 <?= $productPrice ?></p>
             <div class="b-ad-btn">
-                <form method="post" action="">
-                    <button type="submit" class="buy">Buy Now</button>
-                    <button type="submit" class="ad-crt" name="add_to_cart">Add to Cart</button>
+                <form method="post" action="" class="form-submit">
+                    <input type="hidden" class="pid" value=<?= $productId?>>
+                    <input type="hidden" class="ptitle" value=<?= $productName?>>
+                    <input type="hidden" class="pimage" value=<?= $productImage?>>
+                    <input type="hidden" class="pprice" value=<?= $productPrice?>>
+                    <button type="submit" class="buy" name="buy_now">Buy Now</button>
+                    <button type="submit" class="ad-crt" id="addToCart" name="add_to_cart">Add to Cart</button>
+                    <button type="button" class="go-to-cart" style="display: none;">Go to Cart</button>
                 </form>
             </div>
           </div>
@@ -180,26 +178,29 @@ if (isset($_POST['add_to_cart'])) {
     </section>
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-    integrity="sha256-oP6HI/t1jdt1tAkaAq4Y5x9u5K3eckbllAqLOczlMUE=" crossorigin="anonymous"></script>
-    <script>
-    $(document).ready(function () {
-        // Add an event listener to the "Add to Cart" form
-        $('form[name="add-to-cart-form"]').submit(function (event) {
-            // Prevent the default form submission
-            event.preventDefault();
+  <script type="text/javascript">
+    $(document).ready(function(){
+        var addToCartBtn = $("#addToCart");
+        var goToCartBtn = $(".go-to-cart");
 
-            // Use AJAX to submit the form data
+        addToCartBtn.click(function(e){
+            e.preventDefault();
+            var $form = $(this).closest(".form-submit");
+            var pid = $form.find(".pid").val();
+            var ptitle = $form.find(".ptitle").val();
+            var pimage = $form.find(".pimage").val();
+            var pprice = $form.find(".pprice").val();
+
             $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                success: function (response) {
-                    // Handle the success response (optional)
-                    console.log(response);
-
-                    // You can display a message to the user if needed
-                    alert('Product added to cart successfully!');
+                url: 'action.php',
+                method: 'post',
+                data: { pid:pid, ptitle:ptitle, pprice:pprice, pimage:pimage},
+                success:function(response){
+                    // Toggle button text
+                    addToCartBtn.hide();
+                    goToCartBtn.show();
+                    // alert('Product added to cart successfully!');
+                    loadCartQuantity();
                 },
                 error: function (error) {
                     // Handle the error response (optional)
@@ -207,10 +208,31 @@ if (isset($_POST['add_to_cart'])) {
                 }
             });
         });
+
+        // Add event listener for "Go to Cart" button
+        goToCartBtn.click(function() {
+            window.location.href = 'cart-pg.php'; 
+        });
+
+        loadCartQuantity();
+
+        function loadCartQuantity(){
+            $.ajax({
+                url:'action.php',
+                method: 'get',
+                data: {cartCount:"cartCount"}, 
+                success: function(response){
+                    $(".cart_count").html(response); 
+                }
+            });
+        }
     });
 </script>
 
+
+
   <script>
+
     document.addEventListener("DOMContentLoaded", function () {
       // Get the gallery images and main product image element
       var galleryImages = document.querySelectorAll(".gallery-img");
@@ -226,66 +248,8 @@ if (isset($_POST['add_to_cart'])) {
     });
   </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var img = document.getElementById("myimage");
-      var lens = document.createElement("DIV");
-      lens.setAttribute("class", "img-zoom-lens");
-      img.parentElement.insertBefore(lens, img);
-      var result = document.getElementById("myresult");
-      var cx = result.offsetWidth / lens.offsetWidth;
-      var cy = result.offsetHeight / lens.offsetHeight;
 
-      result.style.backgroundImage = "url('" + img.src + "')";
-      result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
-
-      lens.addEventListener("mousemove", moveLens);
-      img.addEventListener("mousemove", moveLens);
-      lens.addEventListener("touchmove", moveLens);
-      img.addEventListener("touchmove", moveLens);
-
-      function moveLens(e) {
-        var pos, x, y;
-        e.preventDefault();
-        pos = getCursorPos(e);
-        x = pos.x - (lens.offsetWidth / 2);
-        y = pos.y - (lens.offsetHeight / 2);
-
-        if (x > img.width - lens.offsetWidth) {
-          x = img.width - lens.offsetWidth;
-        }
-        if (x < 0) {
-          x = 0;
-        }
-        if (y > img.height - lens.offsetHeight) {
-          y = img.height - lens.offsetHeight;
-        }
-        if (y < 0) {
-          y = 0;
-        }
-
-        lens.style.left = x + "px";
-        lens.style.top = y + "px";
-        result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
-      }
-
-      function getCursorPos(e) {
-        var a, x = 0, y = 0;
-        e = e || window.event;
-        a = img.getBoundingClientRect();
-        x = e.pageX - a.left;
-        y = e.pageY - a.top;
-        x = x - window.pageXOffset;
-        y = y - window.pageYOffset;
-        return { x: x, y: y };
-      }
-    });
-</script>
-
-
-
-
-  <!-- <script src="index.js"></script> -->
+  <script src="index.js"></script>
 </body>
 
 </html>

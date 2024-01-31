@@ -47,3 +47,18 @@ function decreaseCount(a, b) {
 }
 
 
+// Cart Count
+$(document).ready(function () {
+  loadCartQuantity();
+
+  function loadCartQuantity() {
+      $.ajax({
+          url: 'action.php',
+          method: 'get',
+          data: { cartCount: "cartCount" },
+          success: function (response) {
+              $(".cart_count").html(response);
+          }
+      });
+  }
+});

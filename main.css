@@ -67,10 +67,11 @@ a.log-link {
     font-family: 'Poppins', sans-serif;
     position: relative;
 }
-span.cart-count {
+span.cart_count {
     position: absolute;
     top: -10px;
     left: 19px;
+    color: #ffffff;
     background-color: #ff3030;
     width: 20px;
     border-radius: 50px;
@@ -152,7 +153,33 @@ h3.category-name a:hover {
     color: #675fc3;
 }
 
+/* page category bar */
+.sub_nav{
+    background-color: #ffffff;
+}
+
+.inner-sub-nav{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+a.category-name {
+    color: #000000 !important;
+    margin: 10px 0px !important;
+}
+
+a.category-name:hover{
+    color: #675fc3 !important;
+
+}
+/* a.category-name a{
+   
+} */
+
+
+
 /*  */
+
 
 /* carousel */
 
@@ -437,6 +464,13 @@ button.buy {
     color: #ffffff;
 }
 button.ad-crt {
+    width: 40%;
+    height: 45px;
+    margin: 8px;
+    background-color: #dddddd;
+}
+
+button.go-to-cart{
     width: 40%;
     height: 45px;
     margin: 8px;

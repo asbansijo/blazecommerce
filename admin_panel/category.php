@@ -112,6 +112,8 @@ if (isset($_POST['edit-Category'])) {
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 </head>
 
@@ -242,7 +244,6 @@ if (isset($_POST['edit-Category'])) {
         </section>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <!-- delete Category with Ajax -->
     <script type="text/javascript">
@@ -261,7 +262,6 @@ if (isset($_POST['edit-Category'])) {
                         },
                         success: function (response) {
                             if (response === 'success') {
-                                alert("Data Deleted Successfully");
                                 $("#delete_id" + categoryId)
                                     .remove(); // Remove the deleted category container
                             }

@@ -33,6 +33,7 @@ $result = mysqli_query($conn, $sql);
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 </head>
 
@@ -45,7 +46,7 @@ $result = mysqli_query($conn, $sql);
         <input class="search" type="search" value="" placeholder="search">
         <ul class="nav-list navbar-nav mb-2 mb-lg-0">
         <li class="nav-item"><button style="background:#675fc3;padding: 5px 9px;border-radius: 4px;"><a class="log-link" style="color: #fbfbfb;" href="./login.php"><i class="fa-regular fa-user nav-icon"></i>Login</a></button></li>
-          <li class="nav-item"><a class="log-link" style="color: #000000;" href="./cart-pg.php"><i class="fa-solid fa-cart-shopping nav-icon"></i>
+          <li class="nav-item"><a class="log-link" style="color: #000000;" href="./cart-pg.php"><span class="cart_count"></span><i class="fa-solid fa-cart-shopping nav-icon"></i>
             Cart</a></li>
           <li class="nav-item"><a class="log-link" style="color: #000000;" href="#"><i class="fa-regular fa-heart nav-icon"></i>
             Wishlist</a></li>
@@ -407,6 +408,20 @@ $result = mysqli_query($conn, $sql);
       </div>
     </section>
   </footer>
+   <script type="text/javascript">
+      loadCartQuantity();
+
+      function loadCartQuantity(){
+        $.ajax({
+          url:'action.php',
+          method: 'get',
+          data: {cartCount:"cartCount"}, 
+          success: function(response){
+            $(".cart_count").html(response); 
+          }
+        });
+      }
+</script>
   <script src="index.js"></script>
 </body>
 

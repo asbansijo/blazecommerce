@@ -13,6 +13,10 @@ if (isset($_GET['category_id'])) {
     // Handle the case where no category ID is provided
     echo "No category selected.";
 }
+
+
+
+
 ?>
 
 
@@ -43,13 +47,14 @@ if (isset($_GET['category_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 </head>
 
 <body>
-    <header class="sticky-top" style="background-color: #675fc3;">
+    
         <?php include "./main-nav-bar.php";?>
-    </header>
+    
     <a id="myBtn" onclick="topFunction()">
         <i class="fas fa-arrow-up"></i>
     </a>
@@ -68,23 +73,19 @@ if (isset($_GET['category_id'])) {
                         <?php
                         // Display products dynamically
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $productId = $row['product_id'];
-                            $productName = $row['product_title'];
-                            $productPrice = $row['product_price'];
-                            $productImage = $row['product_img'];
                         ?>
                         <div class="card cards">
-                            <a class="cards-link" href="./products_details.php?product_id=<?= $productId ?>"
+                            <a class="cards-link" href="./products_details.php?product_id=<?= $row['product_id'] ?>"
                                 target="_blank">
                                 <!-- Include product ID in the URL and open in a new tab -->
                                 <div class="card-inner">
                                     <div class="c-img-container">
-                                        <img src="./images/<?= $productImage ?>" class="card-img-top card-img"
+                                        <img src="./images/<?= $row['product_img'] ?>" class="card-img-top card-img"
                                             alt="...">
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-title truncate"><?= $productName ?></p>
-                                        <p class="card-price">&#8377 <?= $productPrice ?></p>
+                                        <p class="card-title truncate"><?= $row['product_title'] ?></p>
+                                        <p class="card-price">&#8377 <?= $row['product_price'] ?></p>
                                     </div>
                                 </div>
                             </a>
@@ -151,8 +152,8 @@ if (isset($_GET['category_id'])) {
             </div>
         </section>
     </footer>
-    <!-- <script src="index.js"> -->
-    </script>
+
+    <script src="index.js"></script>
 </body>
 
 </html>

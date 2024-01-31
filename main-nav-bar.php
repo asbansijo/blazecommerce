@@ -11,6 +11,7 @@ if ($userID) {
     $userData = mysqli_fetch_assoc($result);
     $username = $userData['username'];
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +19,8 @@ if ($userID) {
 
 </head>
 <body>
+<header class="sticky-top" style="background-color: #675fc3;">
+
     <nav class="navbar  navbar-expand-lg" style=" box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3); height: 80px;">
         <div class="container-fluid">
           <a class="brand logo-container" href="./index.php"><img class="logo" src="./assets/logo_blazing.png" alt=""
@@ -31,7 +34,7 @@ if ($userID) {
             <?php endif; ?>
             <li class="nav-item">
               <a class="log-link" href="./cart-pg.php" target="_blank">
-                <span class="cart-count">0</span>
+                <span class="cart_count"></span>
                 <i class="fa-solid fa-cart-shopping nav-icon"></i>
                 Cart</a>
             </li>
@@ -40,6 +43,34 @@ if ($userID) {
           </ul>
         </div>
       </nav>
-    
+      </header>
+      <div class="sub_nav">
+        <div class="inner-sub-nav">
+        <?php
+             $categories = mysqli_query($conn, "SELECT * FROM category");
+             while($row = mysqli_fetch_array($categories)){
+        ?>
+        <!-- <p class="category-name"> -->
+          <a class="category-name" href="./products-pg.php?category_id=<?php echo $row['Id']; ?>"><?php echo $row['category_name']?></a>
+        <!-- </p> -->
+        <?php }?>
+        </div>
+      </div>
+      
+      <script type="text/javascript">
+      loadCartQuantity();
+
+      function loadCartQuantity(){
+        $.ajax({
+          url:'action.php',
+          method: 'get',
+          data: {cartCount:"cartCount"}, 
+          success: function(response){
+            $(".cart_count").html(response); 
+          }
+        });
+      }
+</script>
+<script src="index.js"></script>
 </body>
 </html>
