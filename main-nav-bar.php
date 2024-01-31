@@ -44,18 +44,7 @@ if ($userID) {
         </div>
       </nav>
       </header>
-      <div class="sub_nav">
-        <div class="inner-sub-nav">
-        <?php
-             $categories = mysqli_query($conn, "SELECT * FROM category");
-             while($row = mysqli_fetch_array($categories)){
-        ?>
-        <!-- <p class="category-name"> -->
-          <a class="category-name" href="./products-pg.php?category_id=<?php echo $row['Id']; ?>"><?php echo $row['category_name']?></a>
-        <!-- </p> -->
-        <?php }?>
-        </div>
-      </div>
+
       
       <script type="text/javascript">
       loadCartQuantity();

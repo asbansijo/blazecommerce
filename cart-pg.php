@@ -56,7 +56,7 @@ session_start();
               $stmt = $conn->prepare("SELECT * FROM cart");
               $stmt->execute();
               $result = $stmt->get_result();
-
+              $grandTotal = 0;
               // Display cart items
               while ($cartItem = $result->fetch_assoc()) {
                 ?>
@@ -96,7 +96,7 @@ session_start();
               <p class="total-head">Total</p>
               <p class="total-price">&#8377 </p>
             </div>
-            <a class="checkout" href=""><button class="checkout">Checkout</button></a>
+            <a class="checkout" href=""><button class="checkout-btn">Checkout</button></a>
           </div>
         </div>
       </div>
