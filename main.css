@@ -613,7 +613,6 @@ button.remove-product {
     position: absolute;
     bottom: 0%;
     right: 0%;
-    background: none;
     font-size: 16px;
     font-weight: 500;
 }
